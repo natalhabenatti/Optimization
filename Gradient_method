@@ -1,5 +1,8 @@
 # Gradient Método Algorithm
 
+import numpy as np
+import time
+
 def gradient_method(x , eps = 10**(-9), max_iter = 1000, max_time = 120):
     flag = "unknow"
     start = time.clock()
