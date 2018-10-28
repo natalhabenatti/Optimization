@@ -1,0 +1,32 @@
+# Conjugate gradient with Gram-Schimidt Orthogonalization
+
+def Conjugate_gradient(x, A, eps = 10**(-9), max_iter = 1000, max_time = 120):
+    dim = len(A)
+    flag = "unknow"
+    start = time.clock()
+    k = 0
+    g = fgrad(x,A).reshape(dim,1)
+    d = - g
+    D = np.matrix(d)
+    elapsed = 0
+    while (np.linalg.norm(g) > eps) and (k <= max_iter) and (elapsed <= max_time):
+        aux = np.zeros((dim,1))
+        for i in range(0,k):
+            aux += np.asscalar(multi_dot([g.reshape(1,dim), A, D[:,i]])/multi_dot([D[:,i].reshape(1,dim), A, D[:,i]]))*D[:,i]
+        d = -g + aux
+        if (k > 0):
+            D = np.concatenate((D,d), axis = 1)
+        alpha = -np.asscalar(multi_dot([g.reshape(1,dim), d])/multi_dot([d.reshape(1,dim), A, d]))
+        x = x + alpha*d
+        g = grad(x,A)
+        end = time.clock()
+        elapsed = end - start
+        k = k + 1
+   if (np.linalg.norm(d) < eps):
+        flag = "stationary point"
+    elif (k > max_iter):
+        flag = "reached max_iter"
+    elif (elapsed > max_time):
+        flag = "reached max_time"
+    
+    return flag, k, x, fval(x), elapsed
