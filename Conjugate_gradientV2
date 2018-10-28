@@ -1,6 +1,7 @@
 # Conjugate gradient
 
 from numpy.linalg import multi_dot
+import time
 
 def Conjugate_gradient(x, A, eps = 10**(-9), max_iter = 1000, max_time = 120):
     dim = len(A)
