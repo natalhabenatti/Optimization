@@ -1,0 +1,10 @@
+#Level Curves of a quadratic function aX^2+bY^2
+
+def level_curves(a,b):
+  row = np.linspace(-10,10,20) #Limits of meshgrid
+  X,Y = np.meshgrid(row,row)
+  Z    = (a*X**2+b*Y**2)
+  plt.subplot(122)
+  plt.contour(X,Y,Z)
+  plt.axis('equal')
+  plt.show()
