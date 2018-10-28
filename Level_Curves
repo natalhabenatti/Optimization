@@ -1,5 +1,7 @@
 #Level Curves of a quadratic function aX^2+bY^2
 
+import matplotlib.pyplot as plt
+
 def level_curves(a,b):
   row = np.linspace(-10,10,20) #Limits of meshgrid
   X,Y = np.meshgrid(row,row)
