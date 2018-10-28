@@ -24,7 +24,7 @@ def Polak_Ribiere(x, A, eps = 10**(-9), max_iter = 1000, max_time = 120):
         end = time.clock()
         elapsed = end - start
         k = k + 1
-    if (np.linalg.norm(d) < eps):
+    if (np.linalg.norm(fgrad(x)) < eps):
         flag = "stationary point"
     elif (k > max_iter):
         flag = "reached max_iter"
