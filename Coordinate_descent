@@ -1,0 +1,28 @@
+# Coordinate descent method
+# Consider a function f such that fval(x) is the f evaluation and fgrad_i(x) is the i-th partial derivative.
+
+import numpy as np
+import time
+
+def coordinate_descent(x, L, eps = 10**(-9), max_iter = 1000, max_time = 120):
+    flag = "unknow"
+    start = time.clock()
+    k = 0
+    d = - fgrad_i(x,0)
+    elapsed = 0
+    while (np.linalg.norm(d) > eps) and (k <= max_iter) and (elapsed <= max_time):
+        t = 1/L
+        x = x + t*d
+        end = time.clock()
+        elapsed = end - start
+        k = k + 1
+        j = (k % dim)
+        d = - grad_i(x,z,j)
+    if (np.linalg.norm(d) < eps):
+        flag = "stationary point"
+    elif (k > max_iter):
+        flag = "reached max_iter"
+    elif (elapsed > max_time):
+        flag = "reached max_time"
+    
+    return flag, k, x, fval(x), elapsed
